@@ -1,12 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\OrderController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/admin/orders', [AdminController::class, 'orders'])->middleware('auth');
 
-Route::resource('products', ProductController::class)->middleware('auth');
-
-Route::get('/cart/add/{id}', [CartController::class, 'addToCart']);
-Route::view('/cart', 'cart');
