@@ -6,11 +6,16 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\OrderItem;
 
- function checkoutForm() {
+
+class OrderController extends Controller
+{
+
+
+public function checkoutForm() {
     return view('checkout');
 }
 
- function placeOrder(Request $request) {
+public function placeOrder(Request $request) {
     $validated = $request->validate([
         'name' => 'required',
         'email' => 'required|email',
@@ -34,4 +39,5 @@ use App\Models\OrderItem;
 
     session()->forget('cart');
     return redirect('/thank-you');
+}   //
 }

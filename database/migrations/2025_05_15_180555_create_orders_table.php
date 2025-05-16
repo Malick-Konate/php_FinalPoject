@@ -12,14 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('orders', function (Blueprint $table) {
-    $table->id();
-    $table->string('name');
-    $table->string('email');
-    $table->string('address');
-    $table->string('payment_type');
-    $table->decimal('total', 10, 2);
-    $table->timestamps();
-});
+            $table->id();
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('set null'); // Link to user if logged in, nullable for guests
+            $table->string('customer_name');
+            $table->string('customer_email');
+            $table->text('customer_address');
+            $table->string('payment_method'); // To store the selected payment type string
+            $table->decimal('total_amount', 10, 2); // Store the total amount
+            $table->timestamps();
+        });
     }
 
     /**
